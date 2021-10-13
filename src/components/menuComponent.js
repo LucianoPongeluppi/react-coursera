@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import DishDetail from './DishdetailComponent';
 
 class Menu extends Component {
     constructor(props) {
@@ -16,13 +17,20 @@ class Menu extends Component {
     renderDish(dish) {
         if (dish != null) {
             return (
-                <Card>
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />
-                    <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
+                <div className="row" style={{ boxSizing: "border-box", padding: 0, margin: 0 }}>
+                    <div key={dish.id} className="col-12 col-md-5 m-1">
+                        <Card>
+                            <CardImg width="100%" src={dish.image} alt={dish.name} />
+                            <CardBody>
+                                <CardTitle style={{ fontWeight: 'bold', fontSize: 20 }}>{dish.name}</CardTitle>
+                                <CardText>{dish.description}</CardText>
+                            </CardBody>
+                        </Card>
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        <DishDetail dish={dish.comments}></DishDetail>
+                    </div>
+                </div>
             );
         } else {
             return (
@@ -38,7 +46,7 @@ class Menu extends Component {
                     <Card onClick={() => this.onDisheSelect(dish)}>
                         <CardImg width="100%" src={dish.image} alt={dish.name} />
                         <CardImgOverlay>
-                            <CardTitle>{dish.name}</CardTitle>
+                            <CardTitle style={{ fontWeight: 'bold', fontSize: 20 }}>{dish.name}</CardTitle>
                         </CardImgOverlay>
                     </Card>
                 </div>
