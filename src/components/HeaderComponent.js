@@ -18,7 +18,7 @@ class Header extends Component {
         });
     }
 
-    render() {
+    render(props) {
         return (
             <div>
                 <Navbar dark expand="md">
