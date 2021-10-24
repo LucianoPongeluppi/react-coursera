@@ -6,8 +6,12 @@ import { Promotions } from './promotions';
 
 export const ConfigureStore = () => {
     const store = createStore(
-        Reducer,
-        initialState,
+        combineReducers({
+            dishes: Dishes,
+            comments: Comments,
+            promotions: Promotions,
+            leaders: Leaders,
+        })
     );
 
     return store;
