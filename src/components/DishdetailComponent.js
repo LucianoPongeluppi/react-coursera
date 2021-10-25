@@ -6,13 +6,14 @@ import {
 } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
-import {Loading} from './LoadingComponent';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 function RenderDish({ dish }) {
     return (
         <div className="col-12 col-md-5 m-1">
             <Card>
-                <CardImg top src={dish.image} alt={dish.name} />
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                 <CardBody>
                     <CardTitle style={{ fontWeight: 'bold', fontSize: 20 }}>{dish.name}</CardTitle>
                     <CardText>{dish.description}</CardText>
@@ -142,8 +143,8 @@ class CommentForm extends Component {
 }
 
 const DishDetail = (props) => {
-    if (props.isLoading){
-        return(
+    if (props.isLoading) {
+        return (
             <div className="container">
                 <div className="row">
                     <Loading />
@@ -178,7 +179,7 @@ const DishDetail = (props) => {
                 </div>
                 <div className="row">
                     <RenderDish dish={props.dish} />
-                    <RenderComments 
+                    <RenderComments
                         comments={props.comments}
                         addComment={props.addComment}
                         dishId={props.dish.id}
