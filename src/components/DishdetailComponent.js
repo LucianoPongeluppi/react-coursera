@@ -6,6 +6,7 @@ import {
 } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import {Loading} from './LoadingComponent';
 
 function RenderDish({ dish }) {
     return (
@@ -98,17 +99,17 @@ class CommentForm extends Component {
                             </Row>
                             <Row className="form-group">
                                 <Col>
-                                    <Label htmlFor="name">Name</Label>
+                                    <Label htmlFor="author">author</Label>
                                     <Control.text
-                                        model=".name"
-                                        id="name"
+                                        model=".author"
+                                        id="author"
                                         rows="6"
                                         className="form-control"
                                         validators={{ required, minLength: minLength(3), maxLength: maxLength(15) }}
                                     />
                                     <Errors
                                         className="text-danger"
-                                        model=".name"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             required: 'Required',
@@ -141,7 +142,23 @@ class CommentForm extends Component {
 }
 
 const DishDetail = (props) => {
-    if (props.dish != null) {
+    if (props.isLoading){
+        return(
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        <div className="container">
+            <div className="row">
+                <h4>{props.errMess}</h4>
+            </div>
+        </div>
+    }
+    else if (props.dish != null) {
         return (
             <div className="container">
                 <div className="row">
